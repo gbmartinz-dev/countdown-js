@@ -18,3 +18,25 @@ const atualizar = (tempo) => {
     horas.textContent = formatarDigito(qtdHoras);
     dias.textContent = formatarDigito(qtdDias);
 }
+
+const contagemRegressiva = (tempo) => {
+    const pararContagem = () => clearInterval(id);
+
+    const contar = () => {
+        if(tempo === 0){
+            pararContagem();
+        }
+        atualizar (tempo);
+        tempo--;
+    }
+    const id = setInterval(contar,1000);
+}
+
+const tempoRestante = () => {
+    // 1 de janeiro de 1970
+    const dataEvento = new Date ('2025-01-01 00:00:00');
+    const hoje = Date.now();
+    return Math.floor((dataEvento - hoje) / 1000);
+}
+
+contagemRegressiva(tempoRestante());
